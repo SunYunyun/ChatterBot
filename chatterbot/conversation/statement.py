@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 class Statement(object):
     """
     A statement represents a single spoken entity, sentence or

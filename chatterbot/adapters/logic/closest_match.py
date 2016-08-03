@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from .base_match import BaseMatchAdapter
 from fuzzywuzzy import process
+import sys
 
 
 class ClosestMatchAdapter(BaseMatchAdapter):
@@ -32,8 +34,14 @@ class ClosestMatchAdapter(BaseMatchAdapter):
             text_of_all_statements.append(statement.text)
 
         # Check if an exact match exists
-        if input_statement.text in text_of_all_statements:
-            return 1, input_statement
+
+        # Decode unicode strings in python 2.x
+        if sys.version < '3':
+            if input_statement.text.decode('utf-8') in text_of_all_statements:
+                return 1, input_statement
+        else:
+            if input_statement.text in text_of_all_statements:
+                return 1, input_statement
 
         # Get the closest matching statement from the database
         closest_match, confidence = process.extract(

@@ -38,7 +38,6 @@ class Corpus(object):
         """
         Return the data contained within a specified corpus.
         """
-
         corpus_path = self.get_file_path(dotted_path)
 
         corpora = []
